@@ -74,17 +74,14 @@ public class Ticket {
 
     String getInfo() {
         return "Bilet nr: " + count + ", " + eventName + ", " + eventAddress +
-                ", cena: " + basicPrice + "zł, zniżka: " + (discount * 10) + "%, typ biletu: " + typeInfo();
+                ", cena: " + basicPrice + "zł, zniżka: " + (discount * 100) + "%, typ biletu: " + typeInfo();
     }
 
     private String typeInfo() {
-        switch (type) {
-            case ONLINE:
-                return "bilet internetowy";
-            case GIFT:
-                return "bilet prezentowy";
-            default:
-                return "bilet standardowy";
-        }
+        return switch (type) {
+            case ONLINE -> "bilet internetowy";
+            case GIFT -> "bilet prezentowy";
+            default -> "bilet standardowy";
+        };
     }
 }

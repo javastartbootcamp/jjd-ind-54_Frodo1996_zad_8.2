@@ -5,15 +5,11 @@ public class TicketPriceCalc {
     private static final double GIFT_TICKET_ENLARGED = 0.05;
 
     static double priceCalculate(Ticket ticket) {
-        switch (ticket.getType()) {
-            case Ticket.ONLINE:
-                return onlinePrice(ticket);
-            case Ticket.GIFT:
-                return giftPrice(ticket);
-            case Ticket.STANDARD:
-            default:
-                return standardPrice(ticket);
-        }
+        return switch (ticket.getType()) {
+            case Ticket.ONLINE -> onlinePrice(ticket);
+            case Ticket.GIFT -> giftPrice(ticket);
+            default -> standardPrice(ticket);
+        };
     }
 
     private static double giftPrice(Ticket ticket) {
@@ -29,6 +25,6 @@ public class TicketPriceCalc {
     private static double onlinePrice(Ticket ticket) {
         double basicPrice = ticket.getBasicPrice();
         double discount = ticket.getDiscount();
-        return basicPrice - (basicPrice * (discount / 10));
+        return basicPrice - (basicPrice * discount);
     }
 }
